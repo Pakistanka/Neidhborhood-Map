@@ -4,11 +4,56 @@
 	<meta charset="utf-8">
 	<meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<title>Neighborhood Map</title>
+  
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css"/>
   <link rel="stylesheet" href="css/styles.css">
-	<title></title>
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- KnockoutJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.knockout-min.js"></script>
 </head>
 <body>
+	<header>
+    <nav class="mainNav">
+       <img class="mainNav-logo" src="img/earth-globe.svg" alt="Logo">
+       <h1 class="mainNav-title">Neighborhood Map</h1>
+       <button class="btn-menu" type="button" data-bind="click: toggleMenu"><i class="material-icons">menu</i></button>
+    </nav>
+  </header>
 
+
+  <main>
+    <!-- **** LIST VIEW **** -->
+    <div id="list-view" data-bind="css: {'toggleMenu' : isMenuClosed}">
+        <h4 class="foursquare-contribution">Powered by <a target="_blank" href="https://foursquare.com/">Foursquare</a></h4>
+        <h4 class="list-view-section">Filter places</h4>
+        	<div id="list-form">
+          	<input data-bind="textInput: searchQuery, hasFocus: isFocused" class="list-form-input" type="text" placeholder="Enter place: e.g. EmChi">
+        	</div>
+      <h4 class="list-view-section">List of places</h4>
+      	<ul class="list-view-container" data-bind="foreach: filteredLocations">
+          <li><a href="#" data-bind="click: openInfowindow, text: title"></a></li>
+      	</ul>
+    </div>
+
+    <!-- **** MAP VIEW **** -->
+    <!-- Map placeholder -->
+    <div id="map"></div>
+  </main>
+
+
+	
+
+	<!-- Scripts -->
+  <script src="js/model/mapStyle.js"></script>
+  <script src="js/model/locations.js"></script>
+  <script src="js/viewModel/app.js"></script>
+  <script src="js/viewModel/location.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoMWQgW6cDCduEKI-7qLmEwOb4PdIEZL8&callback=initMap"
+    onerror="goggleRequestError()"></script>
 </body>
 </html>
